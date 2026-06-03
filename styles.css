@@ -488,6 +488,13 @@ main {
     padding: 60px 0 120px;
 }
 
+#about.about-section .about-main-title,
+#about.about-section .section-line,
+#about.about-section .about-text {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
 .about-section-header {
     margin-bottom: 28px;
 }
