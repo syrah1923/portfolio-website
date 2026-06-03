@@ -156,11 +156,12 @@ main {
     left: 0;
     width: 100%;
     height: 100%;
-    padding: 40px 0;
+    padding: 50px 0 80px;
     overflow-y: auto;
+    overflow-x: hidden;
     display: none;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     z-index: 2;
     opacity: 0;
     transform: translateY(15px);
@@ -195,7 +196,7 @@ main {
 
 .section-header {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -365,6 +366,7 @@ main {
 .logo-text {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -480,14 +482,71 @@ main {
 }
 
 /* ==========================================================================
+   ABOUT ME (section styles)
+   ========================================================================== */
+#about.about-section {
+    padding: 60px 0 120px;
+}
+
+.about-section-header {
+    margin-bottom: 28px;
+}
+
+.about-main-title {
+    font-family: var(--font-heading);
+    font-size: 2.8rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 14px;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.about-stats-card {
+    padding: 28px 32px;
+    border-radius: 16px;
+}
+
+.about-stat-line {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.8;
+}
+
+.about-info {
+    padding-top: 4px;
+}
+
+.about-text {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 20px;
+}
+
+.about-text strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* ==========================================================================
    HERO SECTION
    ========================================================================== */
 .hero-section {
-    min-height: 100vh;
-    display: flex;
+    justify-content: center;
     align-items: center;
+    display: flex;
     position: relative;
-    padding-top: calc(var(--header-height) + 40px);
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .hero-grid {
@@ -661,15 +720,8 @@ main {
 }
 
 /* ==========================================================================
-   ABOUT ME SECTION
+   ABOUT ME SECTION (inner styles — kept for any legacy references)
    ========================================================================== */
-.about-grid {
-    display: grid;
-    grid-template-columns: 0.8fr 1.2fr;
-    gap: 4.5rem;
-    align-items: center;
-}
-
 .about-visual {
     position: relative;
 }
@@ -682,47 +734,12 @@ main {
     position: relative;
 }
 
-.tech-graphic {
-    width: 180px;
-    height: 180px;
-    margin-bottom: 20px;
-}
-
-.about-status-card {
-    text-align: center;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--card-border);
-    border-radius: 12px;
-    padding: 12px 24px;
-    display: inline-block;
-}
-
-.status-number {
-    font-family: var(--font-heading);
-    font-size: 1.8rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.status-label {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-}
-
 .about-heading {
     font-family: var(--font-heading);
     font-size: 1.8rem;
     font-weight: 700;
     margin-bottom: 18px;
     line-height: 1.35;
-}
-
-.about-text {
-    font-size: 1.05rem;
-    color: var(--text-muted);
-    margin-bottom: 20px;
 }
 
 .key-focus-grid {
@@ -1423,14 +1440,28 @@ textarea.form-input ~ .form-label {
 }
 
 .modal-visual-placeholder {
-    height: 240px;
+    height: 320px;
     border-radius: 16px;
     margin-bottom: 30px;
     border: 1px solid var(--card-border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     overflow: hidden;
+    padding: 0 !important;
+}
+
+.modal-visual-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+}
+
+.modal-visual-placeholder .project-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
 }
 
 .modal-details-grid {
@@ -1587,7 +1618,7 @@ textarea.form-input ~ .form-label {
 /* Tablet Dimensions */
 @media (max-width: 992px) {
     .section {
-        padding: 80px 0;
+        padding: 50px 0 80px;
     }
     
     .hero-grid {
@@ -1930,6 +1961,57 @@ textarea.form-input ~ .form-label {
     border-bottom: 1px solid var(--card-border);
 }
 
+/* New full-bleed image container */
+.project-img-container {
+    height: 240px;
+    position: relative;
+    padding: 12px 14px 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-bottom: 1px solid var(--card-border);
+    border-radius: 20px 20px 0 0;
+}
+
+.project-img-wrapper {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px 8px 0 0;
+}
+
+.project-preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+    border-radius: 8px 8px 0 0;
+}
+
+/* Shown when image is missing */
+.img-placeholder-text {
+    display: none;
+}
+
+.project-img-wrapper.img-missing .project-preview-img {
+    display: none;
+}
+
+.project-img-wrapper.img-missing .img-placeholder-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.05em;
+}
+
+
 .agetech-theme {
     background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
 }
@@ -2144,75 +2226,260 @@ textarea.form-input ~ .form-label {
 }
 
 /* 4. Resume Section Layout */
-.resume-section {
-    position: relative;
-}
-
-.resume-wrapper {
+.resume-grid {
     display: grid;
-    grid-template-columns: 0.8fr 1.2fr;
-    align-items: center;
-    gap: 4rem;
-    padding: 50px;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: start;
+    margin-top: 20px;
 }
 
-.resume-visual-box {
-    display: flex;
-    justify-content: center;
-}
-
-.resume-file-icon {
-    width: 120px;
-    height: 150px;
-    border-radius: 12px;
-    border: 2px dashed var(--secondary-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    background: rgba(20, 184, 166, 0.02);
-}
-
-.doc-icon {
-    width: 60px;
-    height: 60px;
-    color: var(--secondary-color);
-    animation: bounce-file 3s infinite ease-in-out;
-}
-
-@keyframes bounce-file {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-    100% { transform: translateY(0); }
-}
-
-.resume-content-box {
+.resume-column {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    gap: 2rem;
 }
 
-.resume-tag {
-    font-size: 0.8rem;
+.resume-card-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.group-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--secondary-color);
+}
+
+.group-icon {
+    color: var(--secondary-color);
+}
+
+.group-title {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+}
+
+.resume-card {
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+}
+
+.resume-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--primary-color);
+    box-shadow: 0 15px 30px -10px var(--primary-glow);
+}
+
+.card-duration {
+    display: inline-block;
+    font-size: 0.75rem;
     font-weight: 600;
+    color: var(--secondary-color);
+    background: var(--secondary-glow);
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--secondary-color);
-    margin-bottom: 8px;
+    border: 1px solid rgba(20, 184, 166, 0.15);
 }
 
-.resume-title {
+.card-title {
     font-family: var(--font-heading);
-    font-size: 1.8rem;
+    font-size: 1.15rem;
     font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+    line-height: 1.4;
+}
+
+.card-subtitle {
+    font-size: 0.95rem;
+    font-weight: 550;
+    color: var(--text-muted);
     margin-bottom: 12px;
 }
 
-.resume-text {
-    font-size: 1rem;
+.card-desc {
+    font-size: 0.9rem;
     color: var(--text-muted);
-    margin-bottom: 24px;
     line-height: 1.6;
+}
+
+/* Credentials / Certifications List */
+.credentials-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.credentials-list li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.credential-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: var(--secondary-glow);
+    color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    border: 1px solid rgba(20, 184, 166, 0.15);
+}
+
+.credential-details h5 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+}
+
+.credential-details p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Download Section Card */
+.resume-note {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    line-height: 1.65;
+}
+
+.resume-download-card {
+    padding: 24px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.download-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.download-info h4 {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.download-info p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.resume-download-card .btn {
+    flex-shrink: 0;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+}
+
+/* Timeline Layout */
+.timeline {
+    position: relative;
+    padding-left: 20px;
+    margin-left: 10px;
+    border-left: 2px solid var(--card-border);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.timeline-item {
+    position: relative;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -27px;
+    top: 28px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--bg-primary);
+    border: 3px solid var(--secondary-color);
+    box-shadow: 0 0 8px var(--secondary-color);
+    z-index: 5;
+    transition: var(--transition-fast);
+}
+
+.timeline-item:hover .timeline-dot {
+    background-color: var(--secondary-color);
+    transform: scale(1.2);
+}
+
+.timeline-card {
+    padding: 24px;
+    transition: var(--transition-smooth);
+}
+
+.timeline-card:hover {
+    transform: translateX(4px);
+    border-color: var(--secondary-color);
+    box-shadow: 0 10px 25px -10px var(--secondary-glow);
+}
+
+.timeline-badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.badge-tech-mini {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--card-border);
+    padding: 2px 8px;
+    border-radius: 4px;
+    transition: var(--transition-fast);
+}
+
+[data-theme="light"] .badge-tech-mini {
+    background: rgba(15, 23, 42, 0.04);
+}
+
+.timeline-card:hover .badge-tech-mini {
+    color: var(--text-primary);
+    border-color: var(--secondary-color);
+    background: var(--secondary-glow);
+}
+
+.resume-desc-list {
+    margin-left: 18px;
+    padding-left: 2px;
+    list-style-type: disc;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 14px;
+}
+
+.resume-desc-list li {
+    margin-bottom: 6px;
+}
+
+.resume-desc-list li::marker {
+    color: var(--secondary-color);
 }
 
 /* Updated Responsive Media Queries for new layout styles */
@@ -2221,15 +2488,18 @@ textarea.form-input ~ .form-label {
         grid-template-columns: 1fr;
     }
     
-    .resume-wrapper {
+    .resume-grid {
         grid-template-columns: 1fr;
         gap: 3rem;
-        text-align: center;
-        padding: 40px 24px;
     }
     
-    .resume-content-box {
-        align-items: center;
+    .download-flex {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+    
+    .resume-download-card .btn {
+        width: 100%;
     }
 }
-

@@ -100,10 +100,24 @@ function initSPASections() {
                 // trigger entrance transition
                 setTimeout(() => {
                     sec.classList.add('revealed');
+                    
+                    // Staggered animation for inner elements
+                    const revealElements = sec.querySelectorAll('.reveal-on-scroll');
+                    revealElements.forEach((el, index) => {
+                        setTimeout(() => {
+                            el.classList.add('revealed');
+                        }, 100 * index);
+                    });
                 }, 50);
             } else {
                 sec.classList.remove('active-section');
                 sec.classList.remove('revealed');
+                
+                // Reset inner elements for next time
+                const revealElements = sec.querySelectorAll('.reveal-on-scroll');
+                revealElements.forEach(el => {
+                    el.classList.remove('revealed');
+                });
             }
         });
         
@@ -200,24 +214,14 @@ function initSkillsGlow() {
    ========================================================================== */
 const projectData = {
     agetech: {
-        title: "AgeTech: Bridging the Digital Divide for Seniors",
+        title: "AgeTech: Bridging the Digital Divide for Seniors, a Web-based Tutorial Application",
         tags: ["HTML", "CSS", "JavaScript", "PHP", "MySQL", "UI/UX Accessibility"],
         client: "Capstone / Thesis Project",
         duration: "4 Months",
-        role: "Lead Front-End & System Designer",
+        role: "Lead Developer, System Designer, and UI/UX Designer",
         illustrationClass: "agetech-theme",
         illustrationHTML: `
-            <div class="mockup-header-ring" style="margin-bottom: 15px;">
-                <div class="dot-red"></div>
-                <div class="dot-yellow"></div>
-                <div class="dot-green"></div>
-            </div>
-            <div class="visual-interactive-screen" style="height: 100px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); border-radius: 8px;">
-                <div class="screen-tutorial-box" style="text-align: center;">
-                    <div class="tutorial-logo" style="font-weight: 700; color: var(--secondary-color); font-size: 1.1rem;">AgeTech</div>
-                    <div class="tutorial-text-large" style="font-size: 0.8rem; opacity: 0.8; margin-top: 4px;">Lesson 1: Email Basics</div>
-                </div>
-            </div>
+            <img src="image/agetech.jpg" alt="AgeTech Web Application Preview" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block;">
         `,
         overview: "AgeTech is an innovative web-based tutorial application created as a capstone thesis project to tackle digital isolation among elderly populations. By tailoring learning modules, high-contrast layouts, and scalable text properties directly to senior accessibility requirements, it creates a welcoming learning environment where senior citizens can master essential online tools.",
         solutions: [
@@ -234,27 +238,10 @@ const projectData = {
         tags: ["HTML", "CSS", "JavaScript", "PHP", "MySQL", "Team Collaboration"],
         client: "Team Web Application Project",
         duration: "3 Months",
-        role: "Full-Stack Developer & UI Implementer",
+        role: "Documentary",
         illustrationClass: "ireply-theme",
         illustrationHTML: `
-            <div class="mockup-header-ring" style="margin-bottom: 15px;">
-                <div class="dot-red"></div>
-                <div class="dot-yellow"></div>
-                <div class="dot-green"></div>
-            </div>
-            <div class="visual-interactive-screen" style="height: 100px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); border-radius: 8px; padding: 10px;">
-                <div class="screen-inventory-box" style="width: 100%; display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
-                    <div class="inventory-status" style="font-size: 0.75rem; color: #ffbd2e; display: flex; align-items: center; gap: 4px;">
-                        <span style="width:6px; height:6px; background:#ffbd2e; border-radius:50%; display:inline-block;"></span>
-                        <span>Low Stock Alerts (3)</span>
-                    </div>
-                    <div class="inventory-bar-chart" style="display:flex; height: 50px; align-items:flex-end; gap:6px; justify-content: space-around;">
-                        <div style="background:rgba(255,255,255,0.2); height: 50%; width: 14px; border-radius: 2px;"></div>
-                        <div style="background:#ff5f56; height: 20%; width: 14px; border-radius: 2px;"></div>
-                        <div style="background:var(--secondary-color); height: 90%; width: 14px; border-radius: 2px;"></div>
-                    </div>
-                </div>
-            </div>
+            <img src="image/inventory.jpg" alt="iReply Inventory Management System Preview" style="width: 100%; height: 100%; object-fit: cover; object-position: top; display: block;">
         `,
         overview: "iReply is a dynamic web-based inventory management platform developed collaboratively as a multi-member academic group project. Designed to simplify internal warehouse stock tracking, user assignments, and real-time operations logging, it addresses supply chain oversight problems for micro-enterprises.",
         solutions: [
@@ -435,22 +422,37 @@ function initContactForm() {
             return;
         }
         
-        // Enter simulated loading state
+        // Enter loading state
         submitBtn.classList.add('sending');
         const origContent = submitBtn.innerHTML;
         submitBtn.innerHTML = `
             <span>Sending...</span>
             <svg class="spinning-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="animation: spin 1s linear infinite;"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg>
         `;
-        
-        // Mocks server contact submit
-        setTimeout(() => {
+
+        // Send via Formspree — replace YOUR_FORM_ID with your actual Formspree form ID
+        const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+
+        fetch(FORMSPREE_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Accept': 'application/json' },
+            body: new FormData(form)
+        })
+        .then(response => {
             submitBtn.classList.remove('sending');
             submitBtn.innerHTML = origContent;
-            
-            showToast("Message sent successfully! Thank you, Syrah will respond soon.");
-            form.reset();
-        }, 1200);
+            if (response.ok) {
+                showToast("Message sent successfully! Syrah will respond soon.");
+                form.reset();
+            } else {
+                showToast("Something went wrong. Please try again.", "error");
+            }
+        })
+        .catch(() => {
+            submitBtn.classList.remove('sending');
+            submitBtn.innerHTML = origContent;
+            showToast("Network error. Please check your connection.", "error");
+        });
     });
 }
 
