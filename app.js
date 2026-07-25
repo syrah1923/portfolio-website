@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initMobileMenu();
     initSPASections();
+    initTypewriter();
     initSkillsGlow();
     initProjectModals();
     initContactForm();
@@ -45,6 +46,54 @@ function initTheme() {
         // Show interactive feedback toast
         showToast(`Theme switched to ${newTheme === 'dark' ? 'Dark' : 'Light'} Mode`);
     });
+}
+
+/* ==========================================================================
+   TYPEWRITER EFFECT
+   ========================================================================== */
+function initTypewriter() {
+    const el = document.getElementById('typewriter-text');
+    if (!el) return;
+
+    const phrases = [
+        'Web-Based Developer',
+        'Graphic Designer',
+        'UI/UX Designer'
+    ];
+
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typeSpeed = 80;
+    const deleteSpeed = 50;
+    const pauseAfterType = 1800;
+    const pauseAfterDelete = 400;
+
+    function type() {
+        const current = phrases[phraseIndex];
+
+        if (!isDeleting) {
+            el.textContent = current.substring(0, charIndex + 1);
+            charIndex++;
+            if (charIndex === current.length) {
+                isDeleting = true;
+                setTimeout(type, pauseAfterType);
+                return;
+            }
+        } else {
+            el.textContent = current.substring(0, charIndex - 1);
+            charIndex--;
+            if (charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                setTimeout(type, pauseAfterDelete);
+                return;
+            }
+        }
+        setTimeout(type, isDeleting ? deleteSpeed : typeSpeed);
+    }
+
+    type();
 }
 
 /* ==========================================================================
