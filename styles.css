@@ -1856,38 +1856,20 @@ textarea.form-input ~ .form-label {
 .skills-list {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 0.6rem;
 }
 
-.skill-info {
-    display: flex;
-    justify-content: space-between;
+.skills-list li {
     font-size: 0.95rem;
-    font-weight: 550;
-    margin-bottom: 6px;
+    font-weight: 500;
+    color: var(--text-primary);
+    padding: 6px 0;
+    border-bottom: 1px solid var(--card-border);
 }
 
-.percentage {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    font-weight: 400;
+.skills-list li:last-child {
+    border-bottom: none;
 }
-
-.skill-bar-mini {
-    height: 5px;
-    background: rgba(255, 255, 255, 0.04);
-    border-radius: 3px;
-    overflow: hidden;
-}
-
-[data-theme="light"] .skill-bar-mini {
-    background: rgba(15, 23, 42, 0.04);
-}
-
-.skill-fill {
-    height: 100%;
-    border-radius: 3px;
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
 }
 
 .skills-footer-section {
