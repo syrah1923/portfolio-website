@@ -1969,6 +1969,48 @@ textarea.form-input ~ .form-label {
     border-color: rgba(15, 23, 42, 0.15);
 }
 
+/* Canva full-width card */
+.canva-full-card {
+    grid-column: 1 / -1;
+    height: auto;
+}
+
+.canva-tag {
+    background: rgba(124, 58, 237, 0.1);
+    color: #7c3aed;
+    border-color: rgba(124, 58, 237, 0.2);
+}
+
+.canva-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    padding: 0 24px 24px;
+}
+
+.canva-gallery-item {
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+}
+
+.canva-gallery-wide {
+    grid-column: span 2;
+    aspect-ratio: 16/7;
+}
+
+.canva-gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.canva-gallery-item:hover img {
+    transform: scale(1.05);
+}
+
 .project-visual-header {
     height: 220px;
     position: relative;
