@@ -1981,6 +1981,12 @@ textarea.form-input ~ .form-label {
     border-color: rgba(124, 58, 237, 0.2);
 }
 
+.figma-tag {
+    background: rgba(242, 78, 30, 0.1);
+    color: #f24e1e;
+    border-color: rgba(242, 78, 30, 0.2);
+}
+
 .canva-gallery {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
